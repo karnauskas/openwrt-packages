@@ -1,0 +1,21 @@
+diff -Naur mdns-repeater-1.9/mdns-repeater.c mdns-repeater-1.9-new/mdns-repeater.c
+--- mdns-repeater-1.9/mdns-repeater.c	2015-09-20 00:31:08.000000000 +0100
++++ mdns-repeater-1.9-new/mdns-repeater.c	2015-09-20 01:33:31.147934280 +0100
+@@ -288,7 +288,7 @@
+ }
+ 
+ static void show_help(const char *progname) {
+-	fprintf(stderr, "mDNS repeater (version " HGVERSION ")\n");
++	fprintf(stderr, "mDNS repeater\n");
+ 	fprintf(stderr, "Copyright (C) 2011 Darell Tan\n\n");
+ 
+ 	fprintf(stderr, "usage: %s [ -f ] <ifdev> ...\n", progname);
+@@ -426,7 +426,7 @@
+ 				continue;
+ 
+ 			if (foreground)
+-				printf("data from=%s size=%ld\n", inet_ntoa(fromaddr.sin_addr), recvsize);
++				printf("data from=%s size=%zd\n", inet_ntoa(fromaddr.sin_addr), recvsize);
+ 
+ 			for (j = 0; j < num_socks; j++) {
+ 				// do not repeat packet back to the same network from which it originated
