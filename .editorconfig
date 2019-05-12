@@ -1,0 +1,5 @@
+root = true
+
+[{M,m}akefile]
+indent_style = space
+indent_size = 2

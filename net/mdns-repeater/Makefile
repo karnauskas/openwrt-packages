@@ -26,16 +26,16 @@ define Package/mdns-repeater/conffiles
 endef
 
 define Build/Compile
-	$(TARGET_CC) -o $(PKG_BUILD_DIR)/mdns-repeater $(PKG_BUILD_DIR)/mdns-repeater.c
+  $(TARGET_CC) -o $(PKG_BUILD_DIR)/mdns-repeater $(PKG_BUILD_DIR)/mdns-repeater.c
 endef
 
 define Package/mdns-repeater/install
-	$(INSTALL_DIR) -v $(1)/usr/sbin
-	$(INSTALL_BIN) -v $(PKG_BUILD_DIR)/mdns-repeater $(1)/usr/sbin/
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/mdns-repeater.init.sh $(1)/etc/init.d/mdns-repeater
-	$(INSTALL_DIR) $(1)/etc/config
-	$(CP) ./files/default.config $(1)/etc/config/mdns-repeater
+  $(INSTALL_DIR) -v $(1)/usr/sbin
+  $(INSTALL_BIN) -v $(PKG_BUILD_DIR)/mdns-repeater $(1)/usr/sbin/
+  $(INSTALL_DIR) $(1)/etc/init.d
+  $(INSTALL_BIN) ./files/mdns-repeater.init.sh $(1)/etc/init.d/mdns-repeater
+  $(INSTALL_DIR) $(1)/etc/config
+  $(CP) ./files/default.config $(1)/etc/config/mdns-repeater
 endef
 
 $(eval $(call BuildPackage,mdns-repeater))
