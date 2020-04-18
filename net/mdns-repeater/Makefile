@@ -17,7 +17,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/mdns-repeater
 	SECTION:=net
 	CATEGORY:=Network
-	TITLE:=mdns-repeater is a Multicast DNS repeater for Linux
+	TITLE:=Multicast DNS repeater
 	URL:=https://bitbucket.org/geekman/mdns-repeater
 endef
 
