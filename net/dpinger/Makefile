@@ -15,7 +15,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/dpinger
 	SECTION:=net
 	CATEGORY:=Network
-	TITLE:=Pinger engine for monitoring latency and loss 
+	TITLE:=Pinger engine for monitoring latency and loss
 endef
 
 define Build/Compile

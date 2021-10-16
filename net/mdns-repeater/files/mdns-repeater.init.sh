@@ -22,5 +22,5 @@ start() {
 }
 
 stop() {
-  kill `cat /var/run/mdns-repeater.pid`
+  kill $(cat /var/run/mdns-repeater.pid)
 }
