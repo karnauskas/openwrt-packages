@@ -1,6 +1,7 @@
 # https://openwrt.org/docs/guide-developer/toolchain/using_the_sdk
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       version:
