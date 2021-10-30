@@ -43,11 +43,13 @@ jobs:
 
       - run: |
           cd sdk
+          mv -v feeds.conf.default feeds.conf
+          echo "src-git custom https://github.com/karnauskas/openwrt-packages.git" | tee -a feeds.conf
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - run: |
-          make -C sdk package/index
+      # - run: |
+          # make -C sdk package/index
 
       - run: |
           tree -R sdk/bin/packages
