@@ -53,15 +53,14 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a -p custom
 
-      - name: Build
+      - name: Build package
         run: |
           make -C sdk package/${{ matrix.pkg }}/{clean,compile} V=s
-
-      # - run: |
-      #     make -C sdk package/index
-
-      - run: |
           tree -R sdk/bin/packages
+
+      - name: Build index
+        run: |
+          make -C sdk package/index
 
       - uses: actions/upload-artifact@v1
         with:
