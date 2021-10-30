@@ -55,12 +55,12 @@ jobs:
 
       - name: Build package
         run: |
-          make -C sdk package/${{ matrix.pkg }}/{clean,compile} V=s
+          make -C sdk package/${{ matrix.pkg }}/{clean,compile,install} V=s
           tree -R sdk/bin/packages
 
       - name: Build index
         run: |
-          make -C sdk package/index
+          make -C sdk package/index -j1 V=s
 
       - uses: actions/upload-artifact@v1
         with:
