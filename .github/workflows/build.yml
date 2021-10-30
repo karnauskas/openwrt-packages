@@ -33,12 +33,9 @@ jobs:
           # key: ${{ runner.os }}-${{ github.event.inputs.version }}
 
       # https://downloads.openwrt.org/releases/21.02.1/targets/lantiq/xrx200/
-      # - run: wget -c https://downloads.openwrt.org/releases/${{ github.event.inputs.version }}/targets/lantiq/xrx200/openwrt-sdk-${{ github.event.inputs.version }}-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-      - run: wget -q -c https://downloads.openwrt.org/releases/21.02.1/targets/lantiq/xrx200/openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-
-      # - run: tar xvf openwrt-sdk-${{ github.event.inputs.version }}-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-      - name: Extract SDK
+      - name: Setup SDK
         run: |
+          wget -q -c https://downloads.openwrt.org/releases/21.02.1/targets/lantiq/xrx200/openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
           tar xf openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
           ln -s openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64 sdk
           ls -ls
@@ -52,7 +49,7 @@ jobs:
         run: |
           cd sdk
           mv -v feeds.conf.default feeds.conf
-          echo "src-link custom ${{ env.workspace }}/custom" | tee -a feeds.conf
+          echo "src-link custom ${GITHUB_WORKSPACE}/custom" | tee -a feeds.conf
           ./scripts/feeds update -a
           ./scripts/feeds install -a -p custom
 
