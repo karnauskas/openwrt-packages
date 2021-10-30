@@ -1,0 +1,29 @@
+# https://openwrt.org/docs/guide-developer/toolchain/using_the_sdk
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        default: 21.02.1
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: deps
+        run: sudo apt install -y build-essential ccache ecj fastjar file g++ gawk gettext git java-propose-classpath libelf-dev libncurses5-dev libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget python3-distutils python3-setuptools python3-dev rsync subversion swig time xsltproc zlib1g-dev
+
+      - name: cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            openwrt-sdk-${{ github.event.inputs.version }}-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
+          key: ${{ runner.os }}-${{ github.event.inputs.version }}
+
+      # https://downloads.openwrt.org/releases/21.02.1/targets/lantiq/xrx200/
+      - run: wget -c https://downloads.openwrt.org/releases/${{ github.event.inputs.version }}/targets/lantiq/xrx200/openwrt-sdk-${{ github.event.inputs.version }}-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
+
+      - run: tar xvf openwrt-sdk-${{ github.event.inputs.version }}-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
+
+      # - uses: actions/checkout@v2
