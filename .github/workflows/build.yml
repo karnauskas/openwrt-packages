@@ -42,8 +42,9 @@ jobs:
           echo "CONFIG_SRC_TREE_OVERRIDE=y" | tee -a sdk/.config
 
       - run: |
-          cd sdk && ./scripts/feeds update -a
-          cd sdk && ./scripts/feeds install -a
+          cd sdk
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
 
       - run: |
           make -C sdk package/index
