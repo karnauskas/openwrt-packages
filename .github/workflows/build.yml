@@ -1,0 +1,68 @@
+# https://openwrt.org/docs/guide-developer/toolchain/using_the_sdk
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      version:
+        default: 21.02.1
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        pkg:
+          - dpinger
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: custom
+
+      - name: Install dependencies
+        run: sudo apt install -y --no-install-recommends build-essential ccache ecj fastjar file g++ gawk gettext git java-propose-classpath libelf-dev libncurses5-dev libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget python3-distutils python3-setuptools python3-dev rsync subversion swig time xsltproc zlib1g-dev
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
+          key: ${{ runner.os }}-21.02.1
+          # key: ${{ runner.os }}-${{ github.event.inputs.version }}
+
+      # https://downloads.openwrt.org/releases/21.02.1/targets/lantiq/xrx200/
+      - name: Setup SDK
+        run: |
+          wget -q -c https://downloads.openwrt.org/releases/21.02.1/targets/lantiq/xrx200/openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
+          tar xf openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
+          ln -s openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64 sdk
+          ls -ls
+
+      - name: Run default config
+        run: |
+          make -C sdk defconfig
+          echo "CONFIG_SRC_TREE_OVERRIDE=y" | tee -a sdk/.config
+
+      - name: Update package feeds
+        run: |
+          cd sdk
+          mv -v feeds.conf.default feeds.conf
+          echo "src-link custom ${GITHUB_WORKSPACE}/custom" | tee -a feeds.conf
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a -p custom
+
+      - name: Build package
+        run: |
+          make -C sdk package/${{ matrix.pkg }}/{clean,compile} V=s
+          tree -R sdk/bin/packages
+
+      # - name: Build index
+      #   run: |
+      #     make -C sdk package/index -j1 V=s
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: packages
+          path: sdk/bin/packages/
