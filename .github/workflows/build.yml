@@ -15,6 +15,7 @@ jobs:
       matrix:
         pkg:
           - dpinger
+          - mdns-repeater
 
     steps:
       - uses: actions/checkout@v2
@@ -60,10 +61,13 @@ jobs:
         run: |
           make -C sdk package/${{ matrix.pkg }}/{clean,compile} V=s
 
-      - run: |
-          make -C sdk package/index
+      # - run: |
+      #     make -C sdk package/index
 
       - run: |
           tree -R sdk/bin/packages
 
-      # - uses: actions/checkout@v2
+      - uses: actions/upload-artifact@v1
+        with:
+          name: output
+          path: sdk/bin/packages/mips_24kc/packages
