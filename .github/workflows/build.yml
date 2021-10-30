@@ -21,11 +21,6 @@ jobs:
         with:
           path: custom
 
-      - run: |
-          tree -R custom
-          tree -R .
-          exit -1
-
       - name: Install dependencies
         run: sudo apt install -y --no-install-recommends build-essential ccache ecj fastjar file g++ gawk gettext git java-propose-classpath libelf-dev libncurses5-dev libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget python3-distutils python3-setuptools python3-dev rsync subversion swig time xsltproc zlib1g-dev
 
@@ -57,9 +52,9 @@ jobs:
         run: |
           cd sdk
           mv -v feeds.conf.default feeds.conf
-          echo "src-link custom ${{ env.GITHUB_WORKSPACE }}/custom" | tee -a feeds.conf
+          echo "src-link custom ${{ env.workspace }}/custom" | tee -a feeds.conf
           ./scripts/feeds update -a
-          ./scripts/feeds install -a
+          ./scripts/feeds install -a -p custom
 
       - name: Build
         run: |
