@@ -15,7 +15,6 @@ jobs:
       matrix:
         pkg:
           - dpinger
-          - mdns-repeater
 
     steps:
       - uses: actions/checkout@v2
