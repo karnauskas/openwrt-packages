@@ -15,6 +15,7 @@ jobs:
       matrix:
         pkg:
           - dpinger
+          - luci-app-tailscale
 
     steps:
       - uses: actions/checkout@v2

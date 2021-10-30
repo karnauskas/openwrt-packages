@@ -1,0 +1,11 @@
+{
+    "luci-app-tailscale": {
+        "description": "Tailscale UI Access",
+        "read": {
+            "uci": ["tailscale"]
+        },
+        "write": {
+            "uci": ["tailscale"]
+        }
+    }
+}
