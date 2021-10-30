@@ -52,7 +52,7 @@ jobs:
         run: |
           cd sdk
           mv -v feeds.conf.default feeds.conf
-          echo "src-git custom https://github.com/karnauskas/openwrt-packages.git" | tee -a feeds.conf
+          echo "src-link custom ../custom" | tee -a feeds.conf
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
@@ -68,5 +68,5 @@ jobs:
 
       - uses: actions/upload-artifact@v1
         with:
-          name: output
-          path: sdk/bin/packages/mips_24kc/packages
+          name: packages
+          path: sdk/bin/packages/
