@@ -30,8 +30,8 @@ jobs:
 
       # - run: tar xvf openwrt-sdk-${{ github.event.inputs.version }}-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
       - run: |
-          tar xvf openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-          ln -s openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64 src
+          tar xf openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64.tar.xz
+          ln -s openwrt-sdk-21.02.1-lantiq-xrx200_gcc-8.4.0_musl.Linux-x86_64 sdk
           ls -ls
 
       - run: |
