@@ -52,7 +52,7 @@ jobs:
         run: |
           cd sdk
           mv -v feeds.conf.default feeds.conf
-          echo "src-link custom ../custom" | tee -a feeds.conf
+          echo "src-link custom ${{ env.GITHUB_WORKSPACE }}/custom" | tee -a feeds.conf
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
