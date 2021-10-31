@@ -54,7 +54,7 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a -p custom
 
-          if [ test -f logs/feeds/custom/applications/luci-app-tailscale/dump.txt ]; then
+          if [ -f logs/feeds/custom/applications/luci-app-tailscale/dump.txt ]; then
             cat logs/feeds/custom/applications/luci-app-tailscale/dump.txt
           fi
 
