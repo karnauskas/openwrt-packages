@@ -52,7 +52,11 @@ jobs:
           mv -v feeds.conf.default feeds.conf
           echo "src-link custom ${GITHUB_WORKSPACE}/custom" | tee -a feeds.conf
           ./scripts/feeds update -a
-          ./scripts/feeds install -a -p custom
+
+      - name: Install packages for build
+        run: |
+          cd sdk
+          ./scripts/feeds install -p custom ${{ matrix.pkg }}
 
           if [ -f logs/feeds/custom/applications/luci-app-tailscale/dump.txt ]; then
             cat logs/feeds/custom/applications/luci-app-tailscale/dump.txt
@@ -60,7 +64,7 @@ jobs:
 
       - name: Build package
         run: |
-          make -C sdk package/${{ matrix.pkg }}/compile V=s
+          make -C sdk package/${{ matrix.pkg }}/{clean,compile} V=s
           tree -R sdk/bin/packages
 
       # - name: Build index
