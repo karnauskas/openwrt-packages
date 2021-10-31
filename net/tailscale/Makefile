@@ -29,7 +29,7 @@ GO_PKG:=\
 	tailscale.com/cmd/tailscaled
 
 include $(INCLUDE_DIR)/package.mk
-include ../../packages/lang/golang/golang-package.mk
+include ../../lang/golang/golang-package.mk
 
 define Package/tailscale/Default
   SECTION:=net
