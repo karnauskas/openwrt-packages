@@ -64,7 +64,7 @@ jobs:
 
       - name: Build package
         run: |
-          cd src
+          cd sdk
           make package/${{ matrix.pkg }}/{clean,compile} V=s
           tree -R bin/packages
 
