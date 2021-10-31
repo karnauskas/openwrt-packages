@@ -17,7 +17,7 @@ jobs:
       matrix:
         pkg:
           - dpinger
-          - luci-app-tailscale
+          - tailscale
 
     steps:
       - uses: actions/checkout@v2
@@ -62,9 +62,9 @@ jobs:
           cd sdk
           ./scripts/feeds install -p custom ${{ matrix.pkg }}
 
-          if [ -f logs/feeds/custom/applications/luci-app-tailscale/dump.txt ]; then
-            cat logs/feeds/custom/applications/luci-app-tailscale/dump.txt
-          fi
+          # if [ -f logs/feeds/custom/applications/luci-app-tailscale/dump.txt ]; then
+          #   cat logs/feeds/custom/applications/luci-app-tailscale/dump.txt
+          # fi
 
       - name: Build package
         run: |
