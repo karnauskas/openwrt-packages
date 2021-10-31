@@ -54,6 +54,10 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a -p custom
 
+          if [ test -f logs/feeds/custom/applications/luci-app-tailscale/dump.txt ]; then
+            cat logs/feeds/custom/applications/luci-app-tailscale/dump.txt
+          fi
+
       - name: Build package
         run: |
           make -C sdk package/${{ matrix.pkg }}/compile V=s
