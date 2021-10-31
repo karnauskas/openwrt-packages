@@ -1,8 +1,10 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=Tailscale
-LUCI_DEPENDS:=+luci
+LUCI_PKGARCH:=all
+
+PKG_LICENSE:=Apache-2.0
 
 include ../../luci.mk
 
-# https://www.programmerall.com/article/21371465447/
+# call BuildPackage - OpenWrt buildroot signature
