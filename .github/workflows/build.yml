@@ -50,6 +50,8 @@ jobs:
         run: |
           cd sdk
           mv -v feeds.conf.default feeds.conf
+          sed -i -e "s#https://git.openwrt.org/feed/#https://github.com/openwrt/#" feeds.conf
+          sed -i -e "s#https://git.openwrt.org/project/#https://github.com/openwrt/#" feeds.conf
           echo "src-link custom ${GITHUB_WORKSPACE}/custom" | tee -a feeds.conf
           ./scripts/feeds update -a
 
