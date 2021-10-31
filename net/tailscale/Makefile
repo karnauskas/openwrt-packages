@@ -12,7 +12,7 @@ PKG_VERSION:=1.16.2
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/tailscale/tailscale.git
+PKG_SOURCE_URL:=@GITHUB/tailscale/tailscale.git
 PKG_SOURCE_VERSION:=v$(PKG_VERSION)
 
 PKG_MAINTAINER:=Jan Pavlinec <jan.pavlinec1@gmail.com>
@@ -29,7 +29,8 @@ GO_PKG:=\
 	tailscale.com/cmd/tailscaled
 
 include $(INCLUDE_DIR)/package.mk
-include ../../lang/golang/golang-package.mk
+# include ../../lang/golang/golang-package.mk
+include $(GO_INCLUDE_DIR)/golang-package.mk
 
 define Package/tailscale/Default
   SECTION:=net
