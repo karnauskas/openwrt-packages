@@ -2,11 +2,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dpinger
 PKG_RELEASE:=1
-PKG_VERSION=3.0
+PKG_VERSION=3.2
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/dennypage/dpinger.git
-PKG_SOURCE_VERSION:=v3.0
+PKG_SOURCE_VERSION:=v3.2
 
 PKG_LICENSE_FILES:=LICENSE
 
