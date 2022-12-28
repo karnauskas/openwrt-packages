@@ -27,7 +27,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}
           IGNORE_ERRORS: 1
-          V: 1
+          V: sc
 
       - name: Store packages
         uses: actions/upload-artifact@v2
