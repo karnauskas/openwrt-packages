@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - ga-build
+  push:
+    branches:
+      - ga-build
 
 jobs:
   build:
