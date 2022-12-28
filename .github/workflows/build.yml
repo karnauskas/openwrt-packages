@@ -26,6 +26,8 @@ jobs:
         uses: openwrt/gh-action-sdk@master
         env:
           ARCH: ${{ matrix.arch }}
+          IGNORE_ERRORS: 1
+          V: 1
 
       - name: Store packages
         uses: actions/upload-artifact@v2
