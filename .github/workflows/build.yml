@@ -28,6 +28,7 @@ jobs:
           ARCH: ${{ matrix.arch }}
           IGNORE_ERRORS: 1
           NO_DEFAULT_FEEDS: 1
+          PACKAGES: dpinger mdns-repeater ssdpd
           V: sc
 
       - name: Store packages
